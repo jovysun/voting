@@ -1,0 +1,39 @@
+extends layout
+block page
+block content
+  .col-md-4.col-md-offset-4
+    h2 编辑投票
+    div= error
+    div
+      form(action="/reviewVote", method="POST")
+        input(type="hidden" name="voteId" value="#{vote._id}")
+        p
+          label(for="name") 名称：
+          input.form-control(name="name", type="text", placeholder="投票名称" value="#{vote.name}")
+        p
+          label(for="summary") 简介：
+          textarea.form-control(name="summary", placeholder="投票简介")= vote.summary
+        p
+          caption 选项列表：
+
+          table.table.table-stripped
+            thead
+              tr
+                th 选项序号
+                th 选项内容      
+            tbody
+              each item, index in vote.items
+                tr
+                  td= index+1
+                  - if (item.oType == 1)
+                    td
+                      img(src="#{item.content}", width="200")
+                  - else
+                    td= item.content
+                  
+        p
+          a(href="/createItemText/#{vote._id}") 添加选项(文本)
+        p
+          a(href="/createItemImage/#{vote._id}") 添加选项(图片)          
+        p
+          button.btn.btn-lg.btn-primary.btn-block(type="submit") 预览

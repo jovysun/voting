@@ -1,0 +1,10 @@
+extends layout
+block page
+block content
+  div
+    form(action="/upload/#{vote._id}", method="POST", enctype='multipart/form-data')  
+      p
+        input.file(name="upload", type="file")               
+      p
+        button.btn.btn-lg.btn-primary.btn-block(type="submit") 确认
+  

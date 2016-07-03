@@ -1,0 +1,28 @@
+extends layout
+block page
+block content
+  div.admin  
+    h2 用户列表      
+    table.table.table-stripped
+      thead
+        tr
+          th(colspan="2") Actions
+          th email
+          th password
+          th role         
+      tbody
+        each user, index in users
+          tr(data-id="#{user._id}")
+            td.action
+              button.btn.btn-danger.btn-sm.removeUser(type="button")
+                span.glyphicon.glyphicon-remove(title="Remove")
+            td.action
+              a(href="/showUpdateAdmin/#{user._id}" style="display:block;")
+                button.btn.btn-default.btn-sm.update(type="button")
+                  span.glyphicon.glyphicon-pencil
+            td= user.email
+            td= user.password
+            td= user.role == 2 ? '超级管理员' : user.role == 1 ? '管理员' : '投票参与者'
+  div
+    a(href="/showAddAdmin") 添加管理员
+    script(type="text/javascript", src="js/admin.js")

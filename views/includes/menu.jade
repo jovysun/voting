@@ -1,0 +1,12 @@
+.menu
+  ul.nav.nav-pills
+    li(class=(menu === 'index')?'active':'')
+      a(href='/') 首页
+    li(class=(menu === 'vote')?'active':'')
+      a(href="/createVote") 创建投票      
+    li(class=(menu === 'admin')?'active':'')
+      a(href="/listUser") 管理员
+    li
+      a(href="/logout") 注销
+    li(class=(menu === 'login')?'active':'')
+      a(href='/login') 登录

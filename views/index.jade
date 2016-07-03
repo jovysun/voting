@@ -1,0 +1,34 @@
+extends layout
+
+block page 
+block content
+
+  div.admin  
+    h2 投票列表      
+    table.table.table-stripped
+      thead
+        tr
+          th 名称
+          th 发布
+          th 修改时间         
+          th 创建者
+          th 投票地址
+          th(colspan="2") 操作         
+      tbody
+        each vote, index in votes
+          tr(data-id="#{vote._id}")
+            td
+              a(href="/getVote/#{vote._id}")= vote.name
+            td= vote.published
+            td= vote.meta.updateAt
+            td= vote.creator.email
+            td= vote.votingUrl
+            td.action
+              button.btn.btn-danger.btn-sm.removeVote(type="button")
+                span.glyphicon.glyphicon-remove(title="Remove")
+            td.action
+              a(href="/publish/#{vote._id}")
+                button.btn.btn-danger.btn-sm.publish(type="button")
+                  span.glyphicon.glyphicon-share(title="publish")                
+  div
+    script(type="text/javascript", src="js/admin.js")

@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    title 投票
+    script(type="text/javascript", src="/js/jquery-2.0.3.min.js")
+    link(rel='stylesheet', href='/css/bootstrap-3.0.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-3.0.2/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(type="text/javascript", src="/css/bootstrap-3.0.2/js/bootstrap.min.js")
+    script(type="text/javascript", src="/js/blog.js")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  body
+    #wrap
+      .container
+        block alert
+          div.alert.alert-warning.hidden
+        .content
+          h1= vote.name
+          h2= vote.summary
+          p 
+            form(action="/voting", method="post")
+              input(type="hidden" name="voteId" value="#{vote._id}")
+              each item, index in vote.items
+                p
+                  input(type="radio" name="myItem" value="#{item._id}" id="#{item._id}")
+                  - if (item.oType == 1)
+                    label(for="#{item._id}")
+                      img(src="#{item.content}", width="200")
+                  - else
+                      label(for="#{item._id}")= item.content    
+                
+              p
+                button.btn.btn-lg.btn-primary.btn-block(type="submit") 投票
+
+            div
+              script(type="text/javascript", src="js/admin.js")
+    block footer
+      footer
+        .container
+          p
+            | Copyright &copy; 2014 | Issues? Submit to&#32;
+            a(href="https://github.com/azat-co/blog-express/issues") GitHub
+            | .
+
+
+
+
+
+
+
